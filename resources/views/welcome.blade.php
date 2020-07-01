@@ -19,10 +19,7 @@
                 </form>
             </div>
 
-            <div id="users" style=" float: right;">
-                <!--<img style="display: none" src="/img/loading.gif" width="70px"><br>-->
-               
-            </div>
+            <div id="users" style=" float: right;"></div>
         </div>
 
 
@@ -37,10 +34,10 @@
                   type:"POST",
                   url:"/getusers",
                   beforeSend:function(){
-                    $('#users').append('<img src="/img/loading.gif" width="70px">');
+                    $('#users').append('<div class="facebook"><div></div><div></div><div></div></div>');
                   },
                   success: function(response) {
-                    $('img').remove();
+                    $('.facebook').remove();
                     $.each(response, function( index,value ) {
                       $('#users').append("<span>"+value.fName+" "+value.lName+"<span><br>");
                     });
@@ -55,11 +52,11 @@
                             url:"/adduser",
                             data: $('input[type=text]').serialize(),
                             beforeSend:function(){
-                            $('#users').append('<img src="/img/loading.gif" width="70px">');
+                            $('#users').append('<div class="facebook"><div></div><div></div><div></div></div>');
                             },
                             success: function(response) {
                                 $('input[type=text]').val("");
-                                $('img').remove();
+                                $('.facebook').remove();
                                 $('#users').append("<span>"+response.fName+" "+response.lName+"<span><br>");
                             }
                         });
@@ -67,6 +64,71 @@
                 });
             });
         </script>
+
+        <style type="text/css">
+            .facebook div{
+                border-radius: 50%;
+                margin-left:8px;
+                 height:12px;
+                 width:12px;
+                 display:inline-block;
+                 background-color: grey;
+                 -webkit-animation:facebook_loader 1.3s linear infinite;
+                 -moz-animation:facebook_loader 1.3s linear infinite;
+                 animation:facebook_loader 1.3s linear infinite;
+                 -webkit-transform:scale(0.91);
+                 -moz-transform:scale(0.91);
+                 transform:scale(0.91);
+             }
+
+            .facebook div:nth-child(1){
+                 -webkit-animation-delay:0.39s;
+                 -moz-animation-delay:0.39s;
+                 animation-delay:0.39s;
+            }
+            .facebook div:nth-child(2){
+                 -webkit-animation-delay:0.52s;
+                 -moz-animation-delay:0.52s;
+                 animation-delay:0.52s;
+            }
+            .facebook div:nth-child(3){
+                 -webkit-animation-delay:0.65s;
+                 -moz-animation-delay:0.65s;
+                 animation-delay:0.65s;
+            }
+
+            @-webkit-keyframes facebook_loader{
+     0%{
+          -webkit-transform:scale(1.2);
+          opacity:1
+     }
+     100%{
+          -webkit-transform:scale(0.7);
+          opacity:0.1
+     }
+}
+@-moz-keyframes facebook_loader{
+     0%{
+          -moz-transform:scale(1.2);
+          opacity:1
+     }
+     100%{
+          -moz-transform:scale(0.7);
+          opacity:0.1
+     }
+}
+@keyframes facebook_loader{
+     0%{
+          transform:scale(1.2);
+          opacity:1
+     }
+     100%{
+          transform:scale(0.7);
+          opacity:0.1
+     }
+}
+            
+        </style>
         
     </body>
 </html>
