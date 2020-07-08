@@ -13,7 +13,7 @@ class CreateUsersCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'create:users';
+    protected $signature = 'create:users {fName} {lName}';
 
     /**
      * The console command description.
@@ -40,8 +40,8 @@ class CreateUsersCommand extends Command
     public function handle()
     {
         $user = User::create([
-            'fName' => 'Miroslav',
-            'lName' => 'Dojcinovic'
+            'fName' => $this->argument('fName'),
+            'lName' => $this->argument('lName')
         ]);
 
         $this->info("Added " . $user->fName . " " . $user->lName);
