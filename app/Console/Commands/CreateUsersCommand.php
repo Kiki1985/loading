@@ -39,11 +39,11 @@ class CreateUsersCommand extends Command
      */
     public function handle()
     {
-        /*$user= User::create([
+        $user = User::create([
             'fName' => 'Miroslav',
             'lName' => 'Dojcinovic'
-        ])*/
+        ]);
 
-        $this->info("Hello World");
+        $this->info("Added " . $user->fName . " " . $user->lName);
     }
 }
