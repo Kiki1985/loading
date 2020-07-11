@@ -9,12 +9,13 @@
     </head>
 
     <body>
-        <div style="width: 40%; margin: 0 auto">
+        <div style="width: 50%; margin: 0 auto">
             <p style="text-align: center;">Laravel loading spinner ajax jquery</p>
             <div style="float: left">
                 <form>
-                    <input type="text" name="fName" placeholder="First Name"><br>
-                    <input type="text" name="lName" placeholder="Last Name"><br>
+                    <input type="text" name="name" placeholder="Name"><br>
+                    <input type="email" name="email" placeholder="Email"><br>
+                    <input type="password" name="password" placeholder="Password"><br>
                     <button>Submit</button>
                 </form>
             </div>
@@ -32,14 +33,14 @@
             
                 $.ajax({
                   type:"POST",
-                  url:"/getusers",
+                  url:"/getSubscriptions",
                   beforeSend:function(){
                     $('#users').append('<div class="facebook"><div></div><div></div><div></div></div>');
                   },
                   success: function(response) {
                     $('.facebook').remove();
                     $.each(response, function( index,value ) {
-                      $('#users').append("<span>"+value.fName+" "+value.lName+"<span><br>");
+                      $('#users').append("<span>"+value.name+" - "+value.email+"<span><br>");
                     });
                   }
                 });
@@ -49,15 +50,16 @@
                         e.preventDefault();
                         $.ajax({
                             type:"POST",
-                            url:"/adduser",
-                            data: $('input[type=text]').serialize(),
+                            url:"/addSubscription",
+                            data: $('form').serialize(),
                             beforeSend:function(){
                             $('#users').append('<div class="facebook"><div></div><div></div><div></div></div>');
                             },
                             success: function(response) {
-                                $('input[type=text]').val("");
+                                $('input').val("");
+
                                 $('.facebook').remove();
-                                $('#users').append("<span>"+response.fName+" "+response.lName+"<span><br>");
+                                $('#users').append("<span>"+response.name+" - "+response.email+"<span><br>");
                             }
                         });
                     })

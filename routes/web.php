@@ -9,3 +9,8 @@ Route::get('/', function () {
 Route::post('/adduser', 'UsersController@store');
 
 Route::post('/getusers', 'UsersController@userget');
+
+
+Route::post('/addSubscription', 'SubscriptionsController@store');
+
+Route::post('/getSubscriptions', 'SubscriptionsController@getSubscriptions');
