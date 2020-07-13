@@ -9,13 +9,14 @@
     </head>
 
     <body>
-        <div style="width: 50%; margin: 0 auto">
+        <div style="width: 70%; margin: 0 auto">
             <p style="text-align: center;">Laravel loading spinner ajax jquery</p>
             <div style="float: left">
                 <form>
                     <input type="text" name="name" placeholder="Name"><br>
                     <input type="email" name="email" placeholder="Email"><br>
                     <input type="password" name="password" placeholder="Password"><br>
+                    <input type="file" name="avatar"><br>
                     <button>Submit</button>
                 </form>
             </div>
@@ -40,7 +41,8 @@
                   success: function(response) {
                     $('.facebook').remove();
                     $.each(response, function( index,value ) {
-                      $('#users').append("<span>"+value.name+" - "+value.email+"<span><br>");
+                        
+                      $('#users').append("<span>"+value.name+" - "+value.email+" - "+"<img src='/storage/images/"+value.avatar+"' width='35' height='35'><span><br>");
                     });
                   }
                 });
@@ -48,18 +50,22 @@
                 $(function(){
                     $("form").submit(function(e){
                         e.preventDefault();
+                        $input = $('form').serialize();
                         $.ajax({
                             type:"POST",
                             url:"/addSubscription",
                             data: $('form').serialize(),
+                            data: new FormData( this ),
+                            cache: false,
+                            contentType: false,
+                            processData: false,
                             beforeSend:function(){
                             $('#users').append('<div class="facebook"><div></div><div></div><div></div></div>');
                             },
                             success: function(response) {
                                 $('input').val("");
-
                                 $('.facebook').remove();
-                                $('#users').append("<span>"+response.name+" - "+response.email+"<span><br>");
+                                $('#users').append("<span>"+response.name+" - "+response.email+" - "+"<img src='/storage/images/"+response.avatar+"' width='35' height='35'><span><br>");
                             }
                         });
                     })
