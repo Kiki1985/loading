@@ -42,7 +42,7 @@
                     $('.facebook').remove();
                     $.each(response, function( index,value ) {
                         
-                      $('#users').append("<span>"+value.name+" - "+value.email+" - "+"<img src='/storage/images/"+value.avatar+"' width='35' height='35'><span><br>");
+                      $('#users').append("<span><img src='/storage/images/"+value.avatar+"' width='45' height='45'> - "+value.name+" - "+value.email+"<span><br>");
                     });
                   }
                 });
@@ -65,7 +65,7 @@
                             success: function(response) {
                                 $('input').val("");
                                 $('.facebook').remove();
-                                $('#users').append("<span>"+response.name+" - "+response.email+" - "+"<img src='/storage/images/"+response.avatar+"' width='35' height='35'><span><br>");
+                                $('#users').append("<span><img src='/storage/images/"+response.avatar+"' width='45' height='45'> - "+response.name+" - "+response.email+"<span><br>");
                             }
                         });
                     })
